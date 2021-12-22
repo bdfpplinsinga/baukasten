@@ -1,0 +1,39 @@
+{# >>> Comp Defaults #}
+{% set compDefaults = {
+  data: {
+    name: 'c-imageGridCalculated',
+    images: null,
+    caption: null,
+  },
+  classes: {
+    root: 'flex flex-col md:flex-row flex-nowrap gap-4 md:gap-8',
+    custom: '',
+  },
+} %}
+
+{# >>> Merge data / classes / variants (optional) #}
+{% set props = {
+  data: data is defined and data is iterable ? compDefaults.data | merge(data) : compDefaults.data,
+  classes: classes is defined and classes is iterable ? compDefaults.classes | merge(classes) : compDefaults.classes,
+} %}
+
+
+{# Modul #}
+{% if props.data.images ??? null %}
+  <div
+    class="js-imageGridCalculated {{ props.data.name }}  {{ props.classes.root }} {{ props.classes.custom }}">
+    {% for image in props.data.images %}
+      {{ include('_components/image/image.twig', {
+        data: {
+          image: image ??? null,
+          transform: 'auto',
+          renderPlainImage: true,
+          caption: props.data.caption ??? null,
+        },
+        classes: {
+          custom: 'w-full md:max-w-full md:w-auto'
+        }
+      }, withContext = false) }}
+    {% endfor %}
+  </div>
+{% endif %}

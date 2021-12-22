@@ -1,0 +1,65 @@
+{% extends "_layouts/layout-patternlib.twig" %}
+
+{% block blockAppContent %}
+  {% cache using key craft.app.request.pathInfo %}
+
+    {# >>> Render variant #}
+    {% embed 'hidden/patternlib/_partials/_embedComp.twig' %}
+      {% block label %}Slider Images Landscape{% endblock %}
+      {% block content %}
+        {% set images = craft.assets().limit(10).all() %}
+        {{ include('_components/slider/sliderImages.twig', {
+          data: {
+            slides: images ??? null,
+            variant: 'landscape'
+          },
+        }, withContext = false) }}
+      {% endblock %}
+    {% endembed %}
+
+    {# >>> Render variant #}
+    {% embed 'hidden/patternlib/_partials/_embedComp.twig' %}
+      {% block label %}Slider Images Square{% endblock %}
+      {% block content %}
+        {% set images = craft.assets().limit(10).all() %}
+        {{ include('_components/slider/sliderImages.twig', {
+          data: {
+            slides: images ??? null,
+            variant: 'square'
+          },
+        }, withContext = false) }}
+      {% endblock %}
+    {% endembed %}
+
+    {# >>> Render variant #}
+    {% embed 'hidden/patternlib/_partials/_embedComp.twig' %}
+      {% block label %}Slider Images Portrait{% endblock %}
+      {% block content %}
+        {% set images = craft.assets().limit(10).all() %}
+        {{ include('_components/slider/sliderImages.twig', {
+          data: {
+            slides: images ??? null,
+            variant: 'portrait'
+          },
+        }, withContext = false) }}
+      {% endblock %}
+    {% endembed %}
+
+    {# >>> Render variant #}
+    {% embed 'hidden/patternlib/_partials/_embedComp.twig' %}
+      {% block label %}Slider Images Auto{% endblock %}
+      {% block content %}
+        {% set images = craft.assets().limit(10).all() %}
+        {{ include('_components/slider/sliderImages.twig', {
+          data: {
+            slides: images ??? null,
+            variant: 'auto'
+          },
+        }, withContext = false) }}
+      {% endblock %}
+    {% endembed %}
+
+  {% endcache %}
+{% endblock %}
+
+

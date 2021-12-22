@@ -1,0 +1,19 @@
+{# >>> Prefetch links #}
+{% set prefetchUrls = [
+  alias("@assetsUrl"),
+] %}
+
+{# >>> Glabal variables  #}
+{% set baseUrl = alias('@web') ~ '/' %}
+
+{# >>> Glabal JS variables #}
+<script>
+  window.CurrentSite = {
+    'baseUrl': '{{ siteUrl }}',
+    'id': parseInt('{{ currentSite.id }}')
+  }
+</script>
+
+{# >>> Render block App #}
+{% block blockApp %}
+{% endblock %}

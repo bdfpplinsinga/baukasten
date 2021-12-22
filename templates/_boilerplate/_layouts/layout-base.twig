@@ -1,0 +1,56 @@
+{% extends "_boilerplate/_layouts/layout-global-variables.twig" %}
+
+{# >>> Render block app #}
+{% block blockApp %}
+  <!DOCTYPE html>
+  <html class="no-js {{ htmlClass | default('') }}" lang="{{ craft.app.language | slice(0,2) }}">
+  <head>
+    {# >>> Render block head meta #}
+    {{ include('_boilerplate/_partials/head-meta.twig', {}, withContext = true) }}
+    {% block blockHeadMeta %}
+    {% endblock blockHeadMeta %}
+
+    {% block blockHeadFavicons %}
+    {% endblock blockHeadFavicons %}
+
+    {# >>> Render block head js #}
+    {{ include('_boilerplate/_partials/head-js.twig', {}, withContext = true) }}
+    {% block blockHeadJs %}
+    {% endblock blockHeadJs %}
+
+    {# >>> Render block head fonts #}
+    {% block blockHeadFonts %}
+    {% endblock blockHeadFonts %}
+
+    {# >>> Render block head css #}
+    {% block blockHeadCss %}
+    {% endblock blockHeadCss %}
+    <style>
+      [v-cloak],
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
+    {{ include('_boilerplate/_partials/head-critical-css.twig', {}, withContext = true) }}
+
+    {# >>> Include RSS feeds #}
+    {{ include('_boilerplate/_partials/head-rss-feeds.twig', {}, withContext = true) }}
+
+    {# >>> Render block app head #}
+    {% block blockAppHead %}
+    {% endblock blockAppHead %}
+  </head>
+
+  <body class="{{ craft.app.config.general.custom.craftEnv != 'live' ? 'debug-screens' : '' }}">
+  {# >>> Render block app body #}
+  {% block blockAppBody %}
+  {% endblock blockAppBody %}
+
+
+  {# >>> Render block app footer #}
+  {{ include('_boilerplate/_partials/footer-global.twig', {}, withContext = true) }}
+  {% block blockAppFooter %}
+  {% endblock blockAppFooter %}
+  </body>
+  </html>
+{% endblock blockApp %}

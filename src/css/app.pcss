@@ -1,0 +1,58 @@
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ */
+@import 'tailwindcss/base';
+
+/**
+ * Here we add custom base styles, applied after the tailwind-base
+ * classes
+ *
+ */
+@import './base/colors.pcss';
+@import './base/global.pcss';
+@import './base/lazy.pcss';
+@import './base/typography.pcss';
+
+/**
+ * This injects any component classes registered by plugins.
+ *
+ */
+@import 'tailwindcss/components';
+
+/**
+ * Here we add custom component classes; stuff we want loaded
+ * *before* the utilities so that the utilities can still
+ * override them.
+ *
+ */
+@import './components/transitions.pcss';
+@import '../../templates/_components/icon/icon.pcss';
+@import '../../templates/_components/text/text.pcss';
+@import '../../templates/_components/tabs/tabsHolder.pcss';
+
+/**
+ * Include styles for individual pages
+ *
+ */
+@import './pages/homepage.pcss';
+
+/**
+ * This injects all of Tailwind's utility classes, generated based on your
+ * config file.
+ *
+ */
+@import 'tailwindcss/utilities';
+
+/**
+ * Here we add custom utility classes, applied after the tailwind-utilitie
+ * classes
+ *
+ */
+
+/**
+ * Include vendor css.
+ *
+ */
+
+@import 'vendors/formie.pcss';

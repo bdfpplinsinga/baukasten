@@ -1,0 +1,56 @@
+{# >>> Comp Defaults #}
+{% set compDefaults = {
+  data: {
+    name: 'c-sliderImages',
+    slides: null,
+    variant: 'landscape'
+  },
+  classes: {
+    root: '',
+    custom: '',
+    swiperSlide: 'swiper-slide'
+  },
+  variants: {
+    landscape: '!w-11/12 sm:!w-5/12',
+    portrait: '!w-11/12 sm:!w-3/12',
+    square: '!w-11/12 sm:!w-3/12',
+    auto: '!w-11/12 sm:!w-3/12',
+  }
+} %}
+
+  {# >>> Merge data / classes / variants (optional) #}
+  {% set props = {
+    data: data is defined and data is iterable ? compDefaults.data | merge(data) : compDefaults.data,
+    classes: classes is defined and classes is iterable ? compDefaults.classes | merge(classes) : compDefaults.classes,
+    variants: compDefaults.variants,
+  } %}
+
+  {# Component #}
+<div class="{{ props.data.name }} {{ props.classes.root }} {{ props.data.variant }} {{ props.classes.custom }}">
+  {# >>> Embed Swiper Holder #}
+  {% embed "_components/slider/swiperHolder.twig" with {
+    data: {
+      slides: props.data.slides ??? null,
+      variant: props.data.variant,
+    },
+    classes: {
+      swiperSlide: 'swiper-slide',
+    },
+    variants: props.variants
+  } only %}
+    {# >>> Render slides #}
+    {% block swiperSlides %}
+      {% for image in props.data.slides %}
+        <div class="{{ props.classes.swiperSlide }} {{ props.variants[props.data.variant] }}">
+          {{ include('_components/image/image.twig', {
+            data: {
+              image: image ??? null,
+              transform: props.data.variant,
+              renderPlainImage: true,
+            }
+          }, withContext = false) }}
+        </div>
+      {% endfor %}
+    {% endblock %}
+  {% endembed %}
+</div>
